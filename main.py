@@ -16,19 +16,24 @@ def seq3np1(n):
     return count
 
 def lineGraph(uplim):
+  """
+  Displays a graph of the input value with it's respective 3n+1 y value. Also displays the max so far.
+  args: uplim (int) upper limit of graph
+  return: none
+  """
   screen = turtle.Screen()
-  ymax = 0
-  for count in range(uplim):
-    ynew = seq3np1(count+1)
-    if ynew > ymax:
-      ymax = ynew
-  screen.setworldcoordinates(0,0,uplim + 10, ymax + 2)
+  screen.setworldcoordinates(0,0,10,10)
   screen.bgcolor("White")
   myturtle = turtle.Turtle()
   myturtle.speed(0)
   myturtle.fillcolor("Red")
   max_so_far = 0
+  max_turtle = turtle.Turtle()
+  max_turtle.up()
   for start in range (uplim):
+    screen.setworldcoordinates(0,0,start + 10, max_so_far + 10)
+    max_turtle.goto(0, max_so_far)
+    max_turtle.write(str(max_so_far))
     ycoor = seq3np1(start+1)
     if max_so_far < ycoor:
       max_so_far = ycoor
@@ -39,8 +44,8 @@ def lineGraph(uplim):
 
 def main():
   uplim = int(input("Please enter the upper bound: "))
-  lineGraph(uplim)
   if (uplim>0):
+    lineGraph(uplim)
     for start in range (uplim):
       value = int(seq3np1(start+1))
       print("The start value is " + str(start+1) + ", and the number of iterations is " + str(value))
